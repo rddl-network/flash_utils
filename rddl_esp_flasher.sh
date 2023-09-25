@@ -8,6 +8,7 @@ if [ $# -eq 0 ]; then
     exit 1
 fi
 
+boot_app0_file="$script_dir/boot_app0.bin"
 if [ "$1" == "esp32" ]; then
     echo "The argument is $1."
     bootloader_file="$script_dir/esp32/bootloader.bin"
@@ -25,7 +26,7 @@ else
 fi
 
 
-if [ ! -e "$bootloader_file" ] || [ ! -e "$partitions_file" ] || [ ! -e "$firmware_file" ] || [ ! -e "$safeboot_file" ]; then
+if [ ! -e "$bootloader_file" ] || [ ! -e "$partitions_file" ] || [ ! -e "$firmware_file" ] || [ ! -e "$safeboot_file" ] || [ ! -e "$boot_app0_file" ]; then
     echo "One or more required binary files (bootloader.bin, partitions.bin, tasmota32c3-safeboot.bin or firmware.bin) not found in the same directory as the script. Exiting."
     exit 1
 fi
@@ -87,4 +88,4 @@ else
 fi
 
 # Run your fatih.py script
-esptool.py -p $port_path -b 460800 --before default_reset --after hard_reset --chip auto write_flash --flash_mode dio --flash_size detect --flash_freq=keep 0x0000 "$bootloader_file" 0x8000 "$partitions_file" 0x10000 "$safeboot_file" 0xe0000 "$firmware_file"
+esptool.py -p $port_path -b 460800 --before default_reset --after hard_reset --chip auto write_flash --flash_mode dio --flash_size detect --flash_freq=keep 0x0000 "$bootloader_file" 0x8000 "$partitions_file" 0xe000 "$boot_app0_file" 0x10000 "$safeboot_file" 0xe0000 "$firmware_file"
