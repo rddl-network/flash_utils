@@ -5,10 +5,10 @@ This repository contains basic tools to flash devices with RDDL Network compatib
 Please download supported firmwares from 
 https://github.com/rddl-network/Tasmota/releases
 
-and run the bash script ```./rddl_esp_flasher.sh``` with the type of the target MCU that you want to flash, e.g.
+and run the bash script ```./rddl_esp_flasher.sh``` with the type of the target MCU that you want to flash, the firmwaefile .bin, e.g.
 
 ```
-./rddl_esp_flasher.sh esp32c3
+./rddl_esp_flasher.sh esp32c3 firmware.bin
 ``` 
 
 Firmware with preattested machine IDs to interact with the RDDL Network can be retrieved from
