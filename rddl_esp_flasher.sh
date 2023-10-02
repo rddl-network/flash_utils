@@ -3,31 +3,32 @@
 # Check if the required binary files are in the same directory as the script
 script_dir="$(dirname "$0")"
 
-if [ $# -eq 0 ]; then
+if [ $# -lt 2 ]; then
+    echo "Usage: $0 <esp_type> <firmware_file>"
+    echo "Example: $0 esp32 /path/to/tasmota32-rddl.bin"
+    exit 1
+fi
+
+esp_type=$1
+firmware_file=$2
+
+boot_app0_file="$script_dir/boot_app0.bin"
+if [ "$esp_type" == "esp32" ]; then
+    echo "The argument is $esp_type."
+    bootloader_file="$script_dir/esp32/bootloader.bin"
+    partitions_file="$script_dir/esp32/partitions.bin"
+    safeboot_file="$script_dir/esp32/tasmota32-safeboot.bin"
+elif [ "$esp_type" == "esp32c3" ]; then
+    bootloader_file="$script_dir/esp32c3/bootloader.bin"
+    partitions_file="$script_dir/esp32c3/partitions.bin"
+    safeboot_file="$script_dir/esp32c3/tasmota32c3-safeboot.bin"
+else
     echo "Please indicate what kind of ESP you want to flash. esp32 or esp32c3?"
     exit 1
 fi
 
-boot_app0_file="$script_dir/boot_app0.bin"
-if [ "$1" == "esp32" ]; then
-    echo "The argument is $1."
-    bootloader_file="$script_dir/esp32/bootloader.bin"
-    partitions_file="$script_dir/esp32/partitions.bin"
-    firmware_file="$script_dir/tasmota32-rddl.bin"
-    safeboot_file="$script_dir/esp32/tasmota32-safeboot.bin"
-elif [ "$1" == "esp32c3" ]; then
-    bootloader_file="$script_dir/esp32c3/bootloader.bin"
-    partitions_file="$script_dir/esp32c3/partitions.bin"
-    firmware_file="$script_dir/tasmota32c3-rddl.bin"
-    safeboot_file="$script_dir/esp32c3/tasmota32c3-safeboot.bin"
-else
-    echo "Please indicate what kind of ESP you want to flash.\esp32 or esp32c3?"
-    exit 1
-fi
-
-
 if [ ! -e "$bootloader_file" ] || [ ! -e "$partitions_file" ] || [ ! -e "$firmware_file" ] || [ ! -e "$safeboot_file" ] || [ ! -e "$boot_app0_file" ]; then
-    echo "One or more required binary files (bootloader.bin, partitions.bin, tasmota32c3-safeboot.bin or firmware.bin) not found in the same directory as the script. Exiting."
+    echo "One or more required binary files (bootloader.bin, partitions.bin, tasmota32c3-safeboot.bin or firmware.bin) not found in the specified directory or the script directory. Exiting."
     exit 1
 fi
 
