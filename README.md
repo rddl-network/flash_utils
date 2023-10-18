@@ -13,6 +13,6 @@ and run the bash script ```./rddl_esp_flasher.sh``` with the type of the target 
 
 Firmware with preattested machine IDs to interact with the RDDL Network can be retrieved from
 
-https://planetmint-go-testnet-ta.rddl.io/firmware/esp32
+https://testnet-ta.rddl.io/firmware/esp32
 and
-https://planetmint-go-testnet-ta.rddl.io/firmware/esp32c3
+https://testnet-ta.rddl.io/firmware/esp32c3
