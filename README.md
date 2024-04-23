@@ -16,3 +16,17 @@ Firmware with pre-attested machine IDs to interact with the RDDL Network can be 
 https://testnet-ta.rddl.io/firmware/esp32
 and
 https://testnet-ta.rddl.io/firmware/esp32c3
+
+
+## UI
+A small UI delegating thought the potential configuration can be used by installing the requirements into your virtual environment 
+
+```
+pip install -r requirements.txt
+``` 
+
+and executing
+
+```
+python main.py
+``` 
