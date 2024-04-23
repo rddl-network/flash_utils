@@ -31,4 +31,9 @@ Now, you can execute the script ```./rddl_esp_flasher.sh``` with the type of the
 ./rddl_esp_flasher.sh esp32c3 firmware.bin
 ``` 
 
+## UI
+A small UI delegating thought the potential configuration can be used by executing
 
+```
+python main.py
+```
